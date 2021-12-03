@@ -1,7 +1,11 @@
-library components_qt_kit;
+library quadrant_components;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+export 'src/quadrant_requests.dart';
+
+class ClassTeste {
+  String teste1({required int val}){
+    if(val > 6) return "Passou";
+    if(val > 0) return "Reprovado";
+    return "error";
+  }
 }
