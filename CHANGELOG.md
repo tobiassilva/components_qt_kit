@@ -1,3 +1,3 @@
-## 0.0.1
+## [0.0.1] - Primeiro Release.
 
-* TODO: Describe initial release.
+* Primeiro Release
