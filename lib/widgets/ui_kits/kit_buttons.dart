@@ -7,8 +7,8 @@ class KitButton extends StatefulWidget {
   final EdgeInsets paddingButton;
   final double spaceItens;
   final BoxDecoration? decorationButton;
-  final bool
-      shadowButton; //caso nao informedecoration, vem sombreado como padrão
+  final bool shadowButton;
+  //caso nao informedecoration, vem sombreado como padrão
 
   //icon prefix
   final Icon? iconPrefix;
@@ -76,14 +76,20 @@ class _KitButtonState extends State<KitButton> {
             child: widget.iconPrefix,
           ),
 
-          if (widget.iconPrefix != null && widget.text != '') SizedBox(width: widget.spaceItens,),
+          if (widget.iconPrefix != null && widget.text != '')
+            SizedBox(
+              width: widget.spaceItens,
+            ),
           //text
           Text(
             widget.text,
             style: widget.textStyle,
           ),
 
-          if (widget.iconSufix != null && widget.text != '') SizedBox(width: widget.spaceItens,),
+          if (widget.iconSufix != null && widget.text != '')
+            SizedBox(
+              width: widget.spaceItens,
+            ),
           //iconSufix
           Container(
             padding: widget.iconSufixPadding,
