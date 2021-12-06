@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
                       borderRadius: BorderRadius.circular(10)),
                   margin: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                   containTiltle: true,
-                  mainAxisAlignmentTitle: MainAxisAlignment.center,
+                  mainAxisAlignmentTitle: MainAxisAlignment.start,
                   title: 'Email',
                   titleStyle: TextStyle(
                       color: Colors.black,
@@ -69,9 +69,19 @@ class _MyAppState extends State<MyApp> {
                     size: 30,
                   ),
                 ),
-                Center(
+                GestureDetector(
+                  onTap: () {
+                    print('OOOOOOOOOOOI');
+                  },
                   child: KitButton(
                     decorationButton: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black12,
+                              offset: Offset(4, 2),
+                              blurRadius: 1.5,
+                              spreadRadius: 1.0)
+                        ],
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     shadowButton: true,
