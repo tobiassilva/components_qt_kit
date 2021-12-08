@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Kitextfield extends StatefulWidget {
+class KitTextfield extends StatefulWidget {
   // estrutura textfield
   // tamanho container
   final double? heigth;
@@ -54,7 +54,7 @@ class Kitextfield extends StatefulWidget {
   //
   final ValueChanged<String>? onChanged;
 
-  const Kitextfield({
+  const KitTextfield({
     this.heigth,
     this.width,
     this.decoration,
@@ -87,10 +87,10 @@ class Kitextfield extends StatefulWidget {
   });
 
   @override
-  _KitextfieldState createState() => _KitextfieldState();
+  _KitTextfieldState createState() => _KitTextfieldState();
 }
 
-class _KitextfieldState extends State<Kitextfield> {
+class _KitTextfieldState extends State<KitTextfield> {
   @override
   Widget build(BuildContext context) {
     return Column(

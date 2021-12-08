@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
                 SizedBox(
                   height: 50,
                 ),
-                Kitextfield(
+                KitTextfield(
                   heigth: 50,
                   padding:
                       EdgeInsets.only(left: 40, top: 4, bottom: 0, right: 20),
