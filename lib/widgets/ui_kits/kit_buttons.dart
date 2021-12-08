@@ -8,6 +8,7 @@ class KitButton extends StatefulWidget {
   final double spaceItens;
   final BoxDecoration? decorationButton;
   final bool shadowButton;
+  final MainAxisAlignment? mainAxisAlignment;
   //caso nao informedecoration, vem sombreado como padrão
 
   //icon prefix
@@ -40,6 +41,7 @@ class KitButton extends StatefulWidget {
     this.textStyle,
     this.spaceItens = 10,
     this.decorationButton,
+    this.mainAxisAlignment,
     this.shadowButton = true,
   }) /*: super(key: key)*/;
 
@@ -68,6 +70,7 @@ class _KitButtonState extends State<KitButton> {
                 : null,
           ),
       child: Row(
+        mainAxisAlignment: widget.mainAxisAlignment!,
         children: [
           //iconPref
           Container(
