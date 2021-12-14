@@ -27,6 +27,9 @@ class _MyAppState extends State<MyApp> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                KitButton(
+                  onTap: () {},
+                ),
                 SizedBox(
                   height: 50,
                 ),
