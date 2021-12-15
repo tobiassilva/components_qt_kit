@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 List listaRequest = [];
 
 class RequestsComponents {
-  
   Future getRequests(_url) async {
     listaRequest.clear();
     var _requestGet;
@@ -16,13 +15,14 @@ class RequestsComponents {
       if (_resultConexao) {
         _requestGet = await http.get(Uri.parse(_url));
         if (_requestGet.statusCode == 200 && _requestGet.body != null) {
+          var _body = jsonDecode(_requestGet.body);
           var _data = {
             "requisicao_url": "$_url",
             "tipo_requisicao": "GET",
             "status_code": "${_requestGet.statusCode}",
             "conexao": "$_resultConexao",
             "mensagem": "Sucesso",
-            "retorno": "${_requestGet.body}",
+            "retorno": "$_body",
           };
           listaRequest.add(jsonEncode(_data));
 
@@ -78,13 +78,14 @@ class RequestsComponents {
         _requestGet = await http.get(Uri.parse(_url + _parametros));
 
         if (_requestGet.statusCode == 200 && _requestGet.body != null) {
+          var _body = jsonDecode(_requestGet.body);
           var _data = {
             "requisicao_url": "$_url",
             "tipo_requisicao": "GET",
             "status_code": "${_requestGet.statusCode}",
             "conexao": "$_resultConexao",
             "mensagem": "Sucesso",
-            "retorno": "${_requestGet.body}",
+            "retorno": "$_body",
           };
           listaRequest.add(jsonEncode(_data));
           return listaRequest;
@@ -137,13 +138,14 @@ class RequestsComponents {
       if (_resultConexao && _body != null && _url != null) {
         _postRequest = await http.post(Uri.parse(_url), body: _body);
         if (_postRequest.statusCode == 200 && _postRequest.body != null) {
+          var _body = jsonDecode(_postRequest.body);
           var _data = {
             "requisicao_url": "$_url",
             "tipo_requisicao": "POST",
             "status_code": "${_postRequest.statusCode}",
             "conexao": "$_resultConexao",
             "mensagem": "1",
-            "retorno": "Não possui",
+            "retorno": "$_body",
           };
           listaRequest.add(jsonEncode(_data));
           return listaRequest;
@@ -193,13 +195,14 @@ class RequestsComponents {
       if (_resultConexao && _body != null && _url != null) {
         _putRequest = await http.put(Uri.parse(_url), body: _body);
         if (_putRequest.statusCode == 200 && _putRequest.body != null) {
+          var _body = jsonDecode(_putRequest.body);
           var _data = {
             "requisicao_url": "$_url",
             "tipo_requisicao": "GET",
             "status_code": "${_putRequest.statusCode}",
             "conexao": "$_resultConexao",
             "mensagem": "Sucesso",
-            "retorno": "${_putRequest.body}",
+            "retorno": "$_body",
           };
           listaRequest.add(jsonEncode(_data));
           return listaRequest;
