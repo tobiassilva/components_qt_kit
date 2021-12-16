@@ -1,44 +1,79 @@
-Components_qt_kits
-	A ideia principal é a componentização de widgets, que nada mais é do que um widget global ou até mesmo uma função de requisição , por exemplo. 
+<h1 align ='center'>Components_qt_kits</h1>
+<p align = 'justify'>	A ideia principal é a componentização de widgets. Ou seja, os widgets mais usados do nosso desenvolvimento estaram de forma simples e dinamica para qualquer aplicação. </p>
 
 
-Funcionamento:
- importar package ‘components_qt_kit’ em seu arq pubspec.yaml
+<h2>Primeiros passos<h2>
+<p>importe a package </p>
+ 
 
-“components_qt_kit:
+components_qt_kit:
       git:
         url: https://github.com/tobiassilva/components_qt_kit.git
-”
-importar no arquivo
-import 'package:components_qt_kit/src/quadrant_requests.dart';
-Chama o tipo que você quer. Nesse caso eu estou importando algumas funções de requisição.
+ou 
 
-chama o widget/function no codigo
+flutter pub add components_qt_kit
 
+importe no arquivo:
+
+import 'package:components_qt_kit/src/kit_buttons.dart';
+
+<h2 aligin='center'>Importante</h2>
+<p> Esta package possui diversos tipos de Wigets e Funções que podem ser usadas durante a aplicação</p>
+
+<h2>Requests Components</h2>
+
+Nesta classe você pode chamar requisições HTTP,  GET/POST/PUT. Veja no exemplo abaixo:
+
+
+
+<code>
 Future getDados() async {
     var res = await RequestsComponents().getComParametros(
-        "${GlobalsInformations().urlProcon}/pesquisa_data.php}",
-        "?id=3&procon_id=${GlobalsInformations().idProcon}");
- 
+        "${GlobalsInformations().urlDefault}/pesquisa_data.php}",
+        "?pesquisa_id=${GlobalsInformations().idPesquisa}");
+ var decodeDados = jsonDecode(res[0]);
     print("res: $res");
   }
- 
+  
+  </code>
+ <p>para mais informações sobre esta classe: Ctrl + clique esquerdo sobre o nome da classe</p>
+
+<h2>UI KIT's</h2>
 
 
-	Estrutura usada : NomeClasse().nomefuncao(url, outroParam);
+<h3>KitButtons()</h3>
 
-Caso for um widget:
- GestureDetector(
+
+ <p align= 'justify'>Para as nossas classes de UI Kits usamos parametros que são objetivos para cada tipo de Widget.
+ Na classe KitButton temos:
+  - 'onTap' :  que espera uma função,
+  - 'decoration': espera um BoxDecoration(),
+  - 'paddingButton': padding do botão,
+  - 'margingButton': margin do botão,
+  - 'heigth' &  'width': define o tamanho do botão,
+  - 'iconSufix'& 'iconPrefix': espera um Widget Icon(),
+  - 'iconPadding': espaçamento do icone,
+  - 'spaceIcons': é o espaçamento do icone em relação a um outro widget que esta na mesma linha, um iconSufix por exemplo;
+  - 'textStyle': estilização de texto,
+   </p>
+
+
+
+
+ <code>  KitButton(
+                    
                   onTap: () {
-                    print('OOOOOOOOOOOI');
+                   Navigator.of(context).push(MaterialPageRoute(builder :(_)=>HomePage()));
                   },
-                  child: KitButton(
                     decorationButton: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     shadowButton: true,
                     height: 80,
                     width: 200,
+                      paddingButton: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                        margingButton:  const EdgeInsets.all(10),
                     iconSufix: const Icon(
                       Icons.accessibility_new_sharp,
                       size: 25,
@@ -58,14 +93,10 @@ Caso for um widget:
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                     spaceItens: 10,
-                    paddingButton: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
+                  
                   ),
                 ),
+ </code>
  
 	
-para utilizar o botão e os demais Widgets basta:
-NomeClasse(
-Ctrl + espaço => para ver os parâmetros que esse widget possui 
-Em caso de não saber o que o parâmetro recebe faça: Ctrl + clique(esquerdo)
-);
+ 
