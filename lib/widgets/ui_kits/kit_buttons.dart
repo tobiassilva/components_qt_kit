@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class KitButton extends StatefulWidget {
   //botao
-  final double? height;
-  final double? width;
+  final double height;
+  final double width;
   final EdgeInsets paddingButton;
+  final EdgeInsets marginButton;
   final double spaceItens;
   final BoxDecoration? decorationButton;
   final bool shadowButton;
@@ -22,26 +23,28 @@ class KitButton extends StatefulWidget {
   final EdgeInsets? iconSufixPadding;
 
   //text
-  final String text;
-  final TextStyle? textStyle;
+  String text;
+  final TextStyle textStyle;
   //final EdgeInsets ?iconSufixPadding;
 
   // clique
   final GestureTapCallback? onTap;
 
-  const KitButton(
-      {this.height,
-      this.width,
+  KitButton(
+      {this.height = 80,
+      this.width = 200,
       this.paddingButton =
           const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      this.marginButton = const EdgeInsets.all(8),
       this.iconPrefix,
       this.iconPrefixDecoration,
       this.iconPrefixPadding,
       this.iconSufix,
       this.iconSufixDecoration,
       this.iconSufixPadding,
-      this.text = '',
-      this.textStyle,
+      this.text = 'KIT BUTTONS',
+      this.textStyle = const TextStyle(
+          color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
       this.spaceItens = 10,
       this.decorationButton,
       this.mainAxisAlignment,
@@ -53,29 +56,62 @@ class KitButton extends StatefulWidget {
 }
 
 class _KitButtonState extends State<KitButton> {
+  void changedColor() {
+    setState(() {
+      cor = !cor;
+    });
+    if (cor) {
+      setState(() {
+        widget.text = "QT KIT";
+        cor1 = Colors.orangeAccent;
+        cor2 = Colors.deepOrange;
+      });
+    } else {
+      setState(() {
+        widget.text = "KIT BUTTON";
+
+        cor1 = Colors.lightBlue;
+        cor2 = Colors.lightBlueAccent;
+      });
+    }
+  }
+
+  bool cor = false;
+  Color cor1 = Colors.lightBlue;
+  Color cor2 = Colors.lightBlueAccent;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap,
+      onTap: widget.onTap == null
+          ? () {
+              changedColor();
+            }
+          : widget.onTap!,
       child: Container(
         height: widget.height,
         width: widget.width,
         padding: widget.paddingButton,
         decoration: widget.decorationButton ??
             BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [cor1, cor2]),
               borderRadius: const BorderRadius.all(Radius.circular(4)),
               boxShadow: widget.shadowButton
                   ? [
                       const BoxShadow(
-                        blurRadius: 7.0,
-                        color: Colors.black54,
-                        offset: Offset(0, 0),
-                      ),
+                          color: Colors.black26,
+                          offset: Offset(4, 4),
+                          blurRadius: 4,
+                          spreadRadius: -2)
                     ]
                   : null,
             ),
         child: Row(
-          mainAxisAlignment: widget.mainAxisAlignment!,
+          mainAxisAlignment: widget.mainAxisAlignment == null
+              ? MainAxisAlignment.center
+              : widget.mainAxisAlignment!,
           children: [
             //iconPref
             Container(

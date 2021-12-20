@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class KitTextfield extends StatefulWidget {
   // estrutura textfield
   // tamanho container
-  final double? heigth;
-  final double? width;
+  final double heigth;
+  final double width;
 
   // variavel ferificar se quer só o gradient no decoration
   final bool containGradient;
@@ -17,7 +17,7 @@ class KitTextfield extends StatefulWidget {
   final BoxDecoration? decoration;
   // padding e margin do container
   final EdgeInsets? padding;
-  final EdgeInsets? margin;
+  final EdgeInsets margin;
 
   // cor container
   final Color? colorTextField;
@@ -29,21 +29,26 @@ class KitTextfield extends StatefulWidget {
   final String title;
 
   // atributos textField
-  final bool iconTextfield;
+
   final TextInputType? keyboardType;
   final Icon? prefix;
   final Icon? sufix;
+  final bool decorationWithOutline;
+  final Color colorBorderSide;
+  final double widthBorderSide;
+  final FloatingLabelBehavior floatingLabelBehavior;
+  final bool alignLabelWithHint;
 
   final TextStyle? titleStyle;
 
   // em desenvolvimento > final bool? defaultTextField;
 
   // texto textField
-  final String hintText;
-  final TextStyle? hintTextStyle;
+  final String textInTextField;
+  final TextStyle textStyleInTextField;
   // estrutura do textField
 
-  final InputBorder? border;
+  final InputBorder border;
   final bool obscureText;
   final TextEditingController? controller;
   final int? maxlines;
@@ -55,35 +60,43 @@ class KitTextfield extends StatefulWidget {
   final ValueChanged<String>? onChanged;
 
   const KitTextfield({
-    this.heigth,
-    this.width,
+    this.heigth = 50,
+    this.width = 300,
     this.decoration,
-    this.padding,
-    this.margin,
+    this.padding = const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+    this.margin = const EdgeInsets.symmetric(horizontal: 70),
     this.colorGradient,
     this.colorGradient2,
-    this.containTiltle = true,
-    this.title = 'components UI',
+    this.containTiltle = false,
+    this.title = 'QT Components UI',
     this.titleStyle,
     this.onChanged,
-    this.hintText = '',
-    this.hintTextStyle,
-    this.border,
+    this.textInTextField = 'QT Components UI',
+    this.textStyleInTextField = const TextStyle(
+        color: Colors.black, fontSize: 15, fontWeight: FontWeight.w700),
+    this.border = InputBorder.none,
     this.obscureText = false,
     this.controller,
     this.keyboardType,
-    this.prefix,
+    this.prefix = const Icon(
+      Icons.search_rounded,
+      color: Colors.black,
+    ),
     this.sufix,
-    this.iconTextfield = false,
     this.maxlines,
     this.minlines,
     this.colorTextField,
-    this.containGradient = true,
+    this.containGradient = false,
     this.alignmentGradientBegin,
     this.alignmentGradientEnd,
     this.mainAxisAlignmentTitle,
-    this.enable = false,
+    this.enable = true,
     this.enableSuggestions = false,
+    this.decorationWithOutline = false,
+    this.alignLabelWithHint = true,
+    this.colorBorderSide = Colors.orange,
+    this.floatingLabelBehavior = FloatingLabelBehavior.always,
+    this.widthBorderSide = 1.0,
   });
 
   @override
@@ -91,21 +104,24 @@ class KitTextfield extends StatefulWidget {
 }
 
 class _KitTextfieldState extends State<KitTextfield> {
+  final controlador = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         widget.containTiltle!
             ? Container(
-                margin:
-                    widget.margin ?? const EdgeInsets.symmetric(horizontal: 20),
+                margin: widget.margin,
                 child: Row(
                   mainAxisAlignment:
-                      widget.mainAxisAlignmentTitle ?? MainAxisAlignment.start,
+                      widget.mainAxisAlignmentTitle ?? MainAxisAlignment.center,
                   children: [
-                    Text(
-                      widget.title,
-                      style: widget.titleStyle,
+                    SizedBox(
+                      height: 35,
+                      child: Text(
+                        widget.title,
+                        style: widget.titleStyle,
+                      ),
                     ),
                   ],
                 ),
@@ -125,19 +141,19 @@ class _KitTextfieldState extends State<KitTextfield> {
                         blurRadius: 1.5,
                         spreadRadius: 1.0)
                   ],
-                  gradient: widget.containGradient
+                  gradient: !widget.containGradient
                       ? LinearGradient(
                           begin: widget.alignmentGradientBegin ??
                               Alignment.topLeft,
                           end: widget.alignmentGradientEnd ??
                               Alignment.centerRight,
                           colors: [
-                              widget.colorGradient ?? Colors.blue,
+                              widget.colorGradient ?? Colors.white,
                               widget.colorGradient2 ?? Colors.white,
                             ])
                       : const LinearGradient(colors: [
                           Colors.white,
-                          Colors.white,
+                          Colors.blueAccent,
                         ]),
                 ),
             padding: widget.padding,
@@ -146,21 +162,30 @@ class _KitTextfieldState extends State<KitTextfield> {
               onChanged: widget.onChanged,
               keyboardType: widget.keyboardType ?? TextInputType.text,
               obscureText: widget.obscureText,
-              controller: widget.controller,
+              controller: widget.controller ?? controlador,
               enableSuggestions: widget.enableSuggestions,
               minLines: widget.minlines,
               maxLines: widget.maxlines,
-              decoration: InputDecoration(
-                hintText: widget.hintText,
-                hintStyle: widget.hintTextStyle,
-                border: widget.border,
-                enabled: widget.enable,
-                suffixIcon:
-                    widget.iconTextfield ? const Icon(Icons.add) : widget.sufix,
-                prefix: widget.iconTextfield
-                    ? const Icon(Icons.add)
-                    : widget.prefix,
-              ),
+              decoration: widget.decorationWithOutline
+                  ? InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: widget.colorBorderSide,
+                              width: widget.widthBorderSide)),
+                      labelText: widget.textInTextField,
+                      floatingLabelStyle: widget.textStyleInTextField,
+                      floatingLabelBehavior: widget.floatingLabelBehavior,
+                      alignLabelWithHint: widget.alignLabelWithHint,
+                      border: widget.border,
+                    )
+                  : InputDecoration(
+                      hintText: widget.textInTextField,
+                      hintStyle: widget.textStyleInTextField,
+                      border: widget.border,
+                      enabled: widget.enable,
+                      suffixIcon: widget.sufix,
+                      prefixIcon: widget.prefix,
+                    ),
             )),
       ],
     );

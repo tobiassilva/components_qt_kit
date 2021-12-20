@@ -1,6 +1,6 @@
 library quadrant_components;
 
-export 'src/quadrant_requests.dart';
+export 'src/qt_requests.dart';
 
 export 'widgets/ui_kits/kit_text_field.dart';
 export 'widgets/ui_kits/kit_appbars.dart';
