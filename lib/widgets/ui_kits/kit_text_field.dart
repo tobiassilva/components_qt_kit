@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class KitTextfield extends StatefulWidget {
   // estrutura textfield
@@ -53,51 +54,52 @@ class KitTextfield extends StatefulWidget {
   final TextEditingController? controller;
   final int? maxlines;
   final int? minlines;
+  final List<TextInputFormatter>? inputFormatters;
   // habilita textField
   final bool enable;
   final bool enableSuggestions;
   //
   final ValueChanged<String>? onChanged;
 
-  const KitTextfield({
-    this.heigth = 50,
-    this.width = 300,
-    this.decoration,
-    this.padding = const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-    this.margin = const EdgeInsets.symmetric(horizontal: 70),
-    this.colorGradient,
-    this.colorGradient2,
-    this.containTiltle = false,
-    this.title = 'QT Components UI',
-    this.titleStyle,
-    this.onChanged,
-    this.textInTextField = 'QT Components UI',
-    this.textStyleInTextField = const TextStyle(
-        color: Colors.black, fontSize: 15, fontWeight: FontWeight.w700),
-    this.border = InputBorder.none,
-    this.obscureText = false,
-    this.controller,
-    this.keyboardType,
-    this.prefix = const Icon(
-      Icons.search_rounded,
-      color: Colors.black,
-    ),
-    this.sufix,
-    this.maxlines,
-    this.minlines,
-    this.colorTextField,
-    this.containGradient = false,
-    this.alignmentGradientBegin,
-    this.alignmentGradientEnd,
-    this.mainAxisAlignmentTitle,
-    this.enable = true,
-    this.enableSuggestions = false,
-    this.decorationWithOutline = false,
-    this.alignLabelWithHint = true,
-    this.colorBorderSide = Colors.orange,
-    this.floatingLabelBehavior = FloatingLabelBehavior.always,
-    this.widthBorderSide = 1.0,
-  });
+  const KitTextfield(
+      {this.heigth = 50,
+      this.width = 300,
+      this.decoration,
+      this.padding = const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      this.margin = const EdgeInsets.symmetric(horizontal: 70),
+      this.colorGradient,
+      this.colorGradient2,
+      this.containTiltle = false,
+      this.title = 'QT Components UI',
+      this.titleStyle,
+      this.onChanged,
+      this.textInTextField = 'QT Components UI',
+      this.textStyleInTextField = const TextStyle(
+          color: Colors.black, fontSize: 15, fontWeight: FontWeight.w700),
+      this.border = InputBorder.none,
+      this.obscureText = false,
+      this.controller,
+      this.keyboardType,
+      this.prefix = const Icon(
+        Icons.search_rounded,
+        color: Colors.black,
+      ),
+      this.sufix,
+      this.maxlines,
+      this.minlines,
+      this.colorTextField,
+      this.containGradient = false,
+      this.alignmentGradientBegin,
+      this.alignmentGradientEnd,
+      this.mainAxisAlignmentTitle,
+      this.enable = true,
+      this.enableSuggestions = false,
+      this.decorationWithOutline = false,
+      this.alignLabelWithHint = true,
+      this.colorBorderSide = Colors.orange,
+      this.floatingLabelBehavior = FloatingLabelBehavior.always,
+      this.widthBorderSide = 1.0,
+      this.inputFormatters});
 
   @override
   _KitTextfieldState createState() => _KitTextfieldState();
@@ -166,6 +168,7 @@ class _KitTextfieldState extends State<KitTextfield> {
               enableSuggestions: widget.enableSuggestions,
               minLines: widget.minlines,
               maxLines: widget.maxlines,
+              inputFormatters: widget.inputFormatters,
               decoration: widget.decorationWithOutline
                   ? InputDecoration(
                       focusedBorder: OutlineInputBorder(
