@@ -47,18 +47,49 @@ class _MyAppState extends State<MyApp> {
   // }
 
   final controladorTeste = TextEditingController();
+  var icone = Icons.visibility;
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
       data: MediaQueryData(),
       child: MaterialApp(
         home: Scaffold(
-            backgroundColor: Colors.grey[100],
-            body: carregando
-                ? CircularProgressIndicator()
-                : Container(
-                    margin: EdgeInsets.symmetric(vertical: 200),
-                    child: KitTextfield())),
+          backgroundColor: Colors.grey[100],
+          body: carregando
+              ? CircularProgressIndicator()
+              : KitTextfield(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
+                  heigth: 50,
+                  margin: EdgeInsets.symmetric(horizontal: 30),
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  mainAxisAlignmentTitle: MainAxisAlignment.center,
+                  containTiltle: false,
+                  enable: true,
+                  title: "Senha ",
+                  titleStyle: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
+                  controller: controladorTeste,
+                  keyboardType: TextInputType.number,
+                  obscureText: true,
+                  maxlines: 1,
+                  sufix: IconButton(onPressed: null, icon: Icon(icone)),
+                  decorationWithOutline: false,
+                  colorBorderSide: Colors.blue,
+                  widthBorderSide: 1,
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  alignLabelWithHint: true,
+                  prefix: null,
+                  textInTextField: 'Senha ',
+                  textStyleInTextField: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                ),
+        ),
       ),
     );
   }

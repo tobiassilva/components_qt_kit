@@ -33,7 +33,7 @@ class KitTextfield extends StatefulWidget {
 
   final TextInputType? keyboardType;
   final Icon? prefix;
-  final Icon? sufix;
+  final IconButton? sufix;
   final bool decorationWithOutline;
   final Color colorBorderSide;
   final double widthBorderSide;

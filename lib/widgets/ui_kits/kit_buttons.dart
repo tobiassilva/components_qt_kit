@@ -56,37 +56,13 @@ class KitButton extends StatefulWidget {
 }
 
 class _KitButtonState extends State<KitButton> {
-  void changedColor() {
-    setState(() {
-      cor = !cor;
-    });
-    if (cor) {
-      setState(() {
-        widget.text = "QT KIT";
-        cor1 = Colors.orangeAccent;
-        cor2 = Colors.deepOrange;
-      });
-    } else {
-      setState(() {
-        widget.text = "KIT BUTTON";
-
-        cor1 = Colors.lightBlue;
-        cor2 = Colors.lightBlueAccent;
-      });
-    }
-  }
-
   bool cor = false;
   Color cor1 = Colors.lightBlue;
   Color cor2 = Colors.lightBlueAccent;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onTap == null
-          ? () {
-              changedColor();
-            }
-          : widget.onTap!,
+      onTap: widget.onTap!,
       child: Container(
         height: widget.height,
         width: widget.width,
