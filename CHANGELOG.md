@@ -1,5 +1,9 @@
  
-## [0.0.6] - Sexta Release.
+## [0.0.7] - Setima Release.
+
+* Setima Release
+
+ ## [0.0.6] - Sexta Release.
 
 * Sexta Release
 
