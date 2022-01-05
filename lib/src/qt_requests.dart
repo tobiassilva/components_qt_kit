@@ -9,13 +9,16 @@ class RequestsComponents {
   Future getRequests(_url) async {
     listaRequest.clear();
     var _requestGet;
+    var statusCode;
     var _resultConexao;
     try {
       _resultConexao = await resultConexao();
       if (_resultConexao) {
         _requestGet = await http.get(Uri.parse(_url));
+        statusCode = _requestGet.statusCode;
         if (_requestGet.statusCode == 200 && _requestGet.body != null) {
           var _body = jsonDecode(_requestGet.body);
+
           var _data = {
             "requisicao_url": "$_url",
             "tipo_requisicao": "GET",
@@ -55,30 +58,45 @@ class RequestsComponents {
         return listaRequest;
       }
     } on Exception catch (e) {
-      print('ERRO> Requisição esta errada ou conexão\n Exception:$e');
-      var _data = {
-        "requisicao_url": "$_url",
-        "tipo_requisicao": "GET",
-        "status_code": "Não possui",
-        "conexao": "$_resultConexao",
-        "mensagem": "3",
-        "retorno": "Não possui"
-      };
-      listaRequest.add(jsonEncode(_data));
-      return listaRequest;
+      print(
+          'ERRO> Requisição esta errada ou conexão\n Exception:$e\n${_requestGet.body}');
+      if (_requestGet.body != null && _requestGet.statusCode == 200) {
+        var _data = {
+          "requisicao_url": "$_url",
+          "tipo_requisicao": "GET",
+          "status_code": "Não possui",
+          "conexao": "$_resultConexao",
+          "mensagem": "3",
+          "retorno": "${_requestGet.body}",
+        };
+        listaRequest.add(jsonEncode(_data));
+        return listaRequest;
+      } else {
+        var _data = {
+          "requisicao_url": "$_url",
+          "tipo_requisicao": "GET",
+          "status_code": "Não possui",
+          "conexao": "$_resultConexao",
+          "mensagem": "3",
+          "retorno": "$e",
+        };
+        listaRequest.add(jsonEncode(_data));
+        return listaRequest;
+      }
     }
   }
 
   Future getComParametros(_url, _parametros) async {
     listaRequest.clear();
     var _resultConexao, _requestGet;
+    var _body;
     try {
       _resultConexao = await resultConexao();
       if (_resultConexao) {
         _requestGet = await http.get(Uri.parse(_url + _parametros));
 
         if (_requestGet.statusCode == 200 && _requestGet.body != null) {
-          var _body = jsonDecode(_requestGet.body);
+          _body = jsonDecode(_requestGet.body);
           var _data = {
             "requisicao_url": "$_url",
             "tipo_requisicao": "GET",
@@ -118,16 +136,29 @@ class RequestsComponents {
       }
     } on Exception catch (e) {
       print('ERRO> Requisição esta errada ou conexão\n Exception:$e');
-      var _data = {
-        "requisicao_url": "$_url",
-        "tipo_requisicao": "GET",
-        "status_code": "Não possui",
-        "conexao": "$_resultConexao",
-        "mensagem": "3",
-        "retorno": "Não possui",
-      };
-      listaRequest.add(jsonEncode(_data));
-      return listaRequest;
+      if (_requestGet.body != null && _requestGet.statusCode == 200) {
+        var _data = {
+          "requisicao_url": "$_url",
+          "tipo_requisicao": "GET",
+          "status_code": "Não possui",
+          "conexao": "$_resultConexao",
+          "mensagem": "3",
+          "retorno": "${_requestGet.body}",
+        };
+        listaRequest.add(jsonEncode(_data));
+        return listaRequest;
+      } else {
+        var _data = {
+          "requisicao_url": "$_url",
+          "tipo_requisicao": "GET",
+          "status_code": "Não possui",
+          "conexao": "$_resultConexao",
+          "mensagem": "3",
+          "retorno": "$e",
+        };
+        listaRequest.add(jsonEncode(_data));
+        return listaRequest;
+      }
     }
   }
 
