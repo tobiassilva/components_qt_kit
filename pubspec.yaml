@@ -2,8 +2,7 @@ name: components_qt_kit
 description: A new Flutter package project.
 version: 0.0.7
 homepage: https://github.com/tobiassilva/components_qt_kit.git
-
-
+ 
 environment:
   sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
