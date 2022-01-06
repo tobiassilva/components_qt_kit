@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 class KitAppBar extends StatefulWidget {
 // estrutura appbar
-  final double? heigth;
-  final BoxDecoration? boxDecoration;
-  final bool? shadowAppbar;
+  final double heigth;
+  final BoxDecoration boxDecoration;
+  final bool shadowAppbar;
+  final MainAxisAlignment? mainAxisAlignmentUserName;
+  final MainAxisAlignment? mainAxisAlignmentGeral;
+  final MainAxisAlignment? mainAxisAlignment;
   final EdgeInsets paddingAppbar;
   // icone prefix
   final Icon? prefixIcon;
@@ -13,6 +16,8 @@ class KitAppBar extends StatefulWidget {
   final BoxDecoration prefixDecorationButton;
   // icone sufix
   final Icon? sufixIcon;
+  final double heightIcon;
+  final double widthIcon;
 
   final EdgeInsets? sufixPaddingIcon;
   final BoxDecoration sufixDecorationButton;
@@ -32,24 +37,19 @@ class KitAppBar extends StatefulWidget {
   final GestureTapCallback? sufixOnTap;
 
   const KitAppBar({
-    this.heigth,
-    this.boxDecoration,
+    this.heigth = 88,
+    this.boxDecoration = const BoxDecoration(
+      color: Color.fromRGBO(48, 97, 140, 1),
+    ),
     this.shadowAppbar = true,
-    this.paddingAppbar =
-        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-    this.prefixIcon,
-    this.prefixDecorationButton = const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(50)),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 7.0,
-            color: Colors.black54,
-            offset: Offset(0, 0),
-          ),
-        ]),
+    this.paddingAppbar = const EdgeInsets.only(top: 35),
+    this.prefixIcon = const Icon(
+      Icons.arrow_back_ios,
+      color: Colors.white,
+    ),
+    this.prefixDecorationButton = const BoxDecoration(),
     this.prefixOnTap,
-    this.prefixPaddingIcon = const EdgeInsets.all(5),
+    this.prefixPaddingIcon = const EdgeInsets.all(0),
     this.sufixIcon,
     this.sufixDecorationButton = const BoxDecoration(
         color: Colors.white,
@@ -66,11 +66,17 @@ class KitAppBar extends StatefulWidget {
     this.nomeUsuario = '',
     this.onTapImage,
     this.sufixPaddingIcon,
-    this.text = '',
-    this.textStyle,
+    this.text = 'KIT APPBAR',
+    this.textStyle = const TextStyle(
+        color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
     this.spacePrefixText,
     this.spaceSufixText,
     this.sufixOnTap,
+    this.widthIcon = 45,
+    this.heightIcon = 45,
+    this.mainAxisAlignment = MainAxisAlignment.spaceAround,
+    this.mainAxisAlignmentGeral = MainAxisAlignment.spaceAround,
+    this.mainAxisAlignmentUserName,
   });
 
   @override
@@ -81,9 +87,12 @@ class _KitAppBarState extends State<KitAppBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: widget.paddingAppbar,
       height: widget.heigth,
       decoration: widget.boxDecoration,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: widget.mainAxisAlignmentGeral!,
         children: [
           // prefix icon
           GestureDetector(
@@ -92,6 +101,8 @@ class _KitAppBarState extends State<KitAppBar> {
               // caso queira deixar um fundo no icone
               decoration: widget.prefixDecorationButton,
               padding: widget.prefixPaddingIcon,
+              height: widget.heightIcon,
+              width: 45, // widget.widthIcon,
               child: widget.prefixIcon,
             ),
           ),
@@ -131,13 +142,18 @@ class _KitAppBarState extends State<KitAppBar> {
                   ],
                 )
               : Container(),
-          GestureDetector(
-            onTap: widget.sufixOnTap,
-            child: Container(
-                // caso queira deixar um fundo no icone/imagem
-                decoration: widget.sufixDecorationButton,
-                padding: widget.sufixPaddingIcon,
-                child: widget.sufixIcon),
+          Visibility(
+            visible: widget.sufixIcon != null ? true : false,
+            child: GestureDetector(
+              onTap: widget.sufixOnTap,
+              child: Container(
+                  // caso queira deixar um fundo no icone/imagem
+                  decoration: widget.sufixDecorationButton,
+                  padding: widget.sufixPaddingIcon,
+                  height: widget.heightIcon,
+                  width: widget.widthIcon,
+                  child: widget.sufixIcon),
+            ),
           ),
         ],
       ),

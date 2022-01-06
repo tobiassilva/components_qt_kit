@@ -17,7 +17,7 @@ class RequestsComponents {
         _requestGet = await http.get(Uri.parse(_url));
         statusCode = _requestGet.statusCode;
         if (_requestGet.statusCode == 200 && _requestGet.body != null) {
-          var _body = jsonDecode(_requestGet.body);
+          var _body = jsonDecode(_requestGet.body.toString());
 
           var _data = {
             "requisicao_url": "$_url",
@@ -96,7 +96,7 @@ class RequestsComponents {
         _requestGet = await http.get(Uri.parse(_url + _parametros));
 
         if (_requestGet.statusCode == 200 && _requestGet.body != null) {
-          _body = jsonDecode(_requestGet.body);
+          _body = jsonDecode(_requestGet.body.toString());
           var _data = {
             "requisicao_url": "$_url",
             "tipo_requisicao": "GET",
@@ -169,7 +169,7 @@ class RequestsComponents {
       if (_resultConexao && _body != null && _url != null) {
         _postRequest = await http.post(Uri.parse(_url), body: _body);
         if (_postRequest.statusCode == 200 && _postRequest.body != null) {
-          var _body = jsonDecode(_postRequest.body);
+          var _body = jsonDecode(_postRequest.body.toString());
           var _data = {
             "requisicao_url": "$_url",
             "tipo_requisicao": "POST",
@@ -226,7 +226,7 @@ class RequestsComponents {
       if (_resultConexao && _body != null && _url != null) {
         _putRequest = await http.put(Uri.parse(_url), body: _body);
         if (_putRequest.statusCode == 200 && _putRequest.body != null) {
-          var _body = jsonDecode(_putRequest.body);
+          var _body = jsonDecode(_putRequest.body.toString());
           var _data = {
             "requisicao_url": "$_url",
             "tipo_requisicao": "GET",

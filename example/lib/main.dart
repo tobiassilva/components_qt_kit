@@ -50,6 +50,7 @@ class _MyAppState extends State<MyApp> {
   final controladorTeste = TextEditingController();
   final controladorTeste2 = TextEditingController();
   var icone = Icons.visibility;
+
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
@@ -59,110 +60,29 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.grey[100],
           body: carregando
               ? CircularProgressIndicator()
-              : Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  margin: EdgeInsets.symmetric(vertical: 150),
-                  child: Column(
-                    children: [
-                      KitTextfield(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50))),
-                        heigth: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 30),
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        mainAxisAlignmentTitle: MainAxisAlignment.center,
-                        containTiltle: false,
-                        enable: true,
-                        title: "CPF ",
-                        titleStyle: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15),
-                        controller: controladorTeste,
-                        keyboardType: TextInputType.number,
-                        obscureText: false,
-                        maxlines: 1,
-                        sufix: IconButton(onPressed: null, icon: Icon(icone)),
-                        decorationWithOutline: false,
-                        colorBorderSide: Colors.blue,
-                        widthBorderSide: 1,
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        alignLabelWithHint: true,
-                        prefix: null,
-                        textInTextField: 'CPF ',
-                        textStyleInTextField: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
+              : Column(
+                  children: [
+                    KitAppBar(),
+                    Expanded(
+                      child: Container(
+                        color: Colors.white,
+                        height: 900,
+                        width: 500,
+                        margin: EdgeInsets.symmetric(vertical: 0),
+                        child: Column(
+                          children: [
+                            KitButton(
+                              onTap: () {},
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            KitTextfield(),
+                          ],
+                        ),
                       ),
-                      KitTextfield(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50))),
-                        heigth: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 30),
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        mainAxisAlignmentTitle: MainAxisAlignment.center,
-                        containTiltle: false,
-                        enable: true,
-                        title: "Senha ",
-                        titleStyle: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15),
-                        controller: controladorTeste2,
-                        keyboardType: TextInputType.number,
-                        obscureText: true,
-                        maxlines: 1,
-                        sufix: IconButton(onPressed: null, icon: Icon(icone)),
-                        decorationWithOutline: false,
-                        colorBorderSide: Colors.blue,
-                        widthBorderSide: 1,
-                        floatingLabelBehavior: FloatingLabelBehavior.always,
-                        alignLabelWithHint: true,
-                        prefix: null,
-                        textInTextField: 'Senha ',
-                        textStyleInTextField: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      KitButton(
-                        onTap: () async {
-                          var _convert = utf8.encode(controladorTeste2.text);
-                          var senhaCrip = sha256.convert(_convert);
-                          var request = await RequestsComponents().getRequests(
-                            'https://itajuba.myscriptcase.com/prefeitura/api/login_cidadao.php?cpf=${controladorTeste.text}&senha=${senhaCrip.toString()}',
-                          );
-                          var decode = jsonDecode(request[0]);
-                          print("Retorno :: ${decode['retorno']}");
-                          print('Cpf : ${controladorTeste.text}');
-                          print('senhaCrip : $senhaCrip');
-
-                          var validaSessao = await RequestsComponents()
-                              .getComParametros(
-                                  'http://itajuba.myscriptcase.com/prefeitura/api/verify_session.php',
-                                  '?session=${decode['retorno']}');
-                          var _requestSession = jsonDecode(validaSessao[0]);
-                          if (_requestSession['mensagem'] == 'Sucesso') {
-                            print(
-                                'verifySessionReturn:: ${_requestSession['retorno']}');
-                          }
-
-                          if (_requestSession == '1') {
-                            print('deu certo');
-                          }
-                        },
-                      )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
         ),
       ),

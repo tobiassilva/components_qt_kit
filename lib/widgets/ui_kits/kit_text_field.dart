@@ -48,6 +48,7 @@ class KitTextfield extends StatefulWidget {
   final String textInTextField;
   final TextStyle textStyleInTextField;
   // estrutura do textField
+  final bool textFieldWhitGradient;
 
   final InputBorder border;
   final bool obscureText;
@@ -99,7 +100,8 @@ class KitTextfield extends StatefulWidget {
       this.colorBorderSide = Colors.orange,
       this.floatingLabelBehavior = FloatingLabelBehavior.always,
       this.widthBorderSide = 1.0,
-      this.inputFormatters});
+      this.inputFormatters,
+      this.textFieldWhitGradient = false});
 
   @override
   _KitTextfieldState createState() => _KitTextfieldState();
@@ -109,6 +111,38 @@ class _KitTextfieldState extends State<KitTextfield> {
   final controlador = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+        widget.textFieldWhitGradient ? textFieldPadrao() : textFieldPadrao()
+      ],
+    );
+  }
+
+  Widget texfieldWithGradient() {
+    return Container(
+      decoration: widget.decoration,
+      padding: widget.margin,
+      margin: widget.padding,
+      child: Material(
+        elevation: 5,
+        borderRadius: BorderRadius.circular(56),
+        child: TextField(
+          controller: widget.controller,
+          keyboardType: TextInputType.text,
+          obscureText: widget.obscureText,
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: widget.textInTextField,
+            hintStyle: widget.textStyleInTextField,
+            prefixIcon: widget.prefix,
+            suffixIcon: widget.sufix,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget textFieldPadrao() {
     return Column(
       children: [
         widget.containTiltle!
