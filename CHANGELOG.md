@@ -1,4 +1,8 @@
  
+## [0.0.8] - Oitava Release.
+
+* Oitava Release
+
 ## [0.0.7] - Sétima Release.
 
 * Sétima Release
