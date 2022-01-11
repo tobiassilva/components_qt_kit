@@ -132,16 +132,34 @@ class _KitTextfieldState extends State<KitTextfield> {
         borderRadius: BorderRadius.circular(56),
         color: widget.colorMaterial,
         child: TextField(
-          controller: widget.controller,
-          keyboardType: TextInputType.text,
+          onChanged: widget.onChanged,
+          keyboardType: widget.keyboardType ?? TextInputType.text,
           obscureText: widget.obscureText,
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: widget.textInTextField,
-            hintStyle: widget.textStyleInTextField,
-            prefixIcon: widget.prefix,
-            suffixIcon: widget.sufix,
-          ),
+          controller: widget.controller ?? controlador,
+          enableSuggestions: widget.enableSuggestions,
+          minLines: widget.minlines,
+          maxLines: widget.maxlines,
+          inputFormatters: widget.inputFormatters,
+          decoration: widget.decorationWithOutline
+              ? InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: widget.colorBorderSide,
+                          width: widget.widthBorderSide)),
+                  labelText: widget.textInTextField,
+                  floatingLabelStyle: widget.textStyleInTextField,
+                  floatingLabelBehavior: widget.floatingLabelBehavior,
+                  alignLabelWithHint: widget.alignLabelWithHint,
+                  border: widget.border,
+                )
+              : InputDecoration(
+                  hintText: widget.textInTextField,
+                  hintStyle: widget.textStyleInTextField,
+                  border: widget.border,
+                  enabled: widget.enable,
+                  suffixIcon: widget.sufix,
+                  prefixIcon: widget.prefix,
+                ),
         ),
       ),
     );
