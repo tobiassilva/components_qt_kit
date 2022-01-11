@@ -77,7 +77,22 @@ class _MyAppState extends State<MyApp> {
                             SizedBox(
                               height: 20,
                             ),
-                            KitTextfield(),
+                            KitTextfield(
+                              padding: EdgeInsets.all(30),
+                              colorMaterial: Colors.white,
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 5),
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.centerRight,
+                                      colors: [
+                                        Colors.blue,
+                                        Colors.blueGrey,
+                                      ]),
+                                  borderRadius: BorderRadius.circular(56)),
+                              textFieldWithGradient: true,
+                            ),
                           ],
                         ),
                       ),

@@ -36,6 +36,7 @@ class KitTextfield extends StatefulWidget {
   final IconButton? sufix;
   final bool decorationWithOutline;
   final Color colorBorderSide;
+  final Color? colorMaterial;
   final double widthBorderSide;
   final FloatingLabelBehavior floatingLabelBehavior;
   final bool alignLabelWithHint;
@@ -48,7 +49,7 @@ class KitTextfield extends StatefulWidget {
   final String textInTextField;
   final TextStyle textStyleInTextField;
   // estrutura do textField
-  final bool textFieldWhitGradient;
+  final bool textFieldWithGradient;
 
   final InputBorder border;
   final bool obscureText;
@@ -101,7 +102,8 @@ class KitTextfield extends StatefulWidget {
       this.floatingLabelBehavior = FloatingLabelBehavior.always,
       this.widthBorderSide = 1.0,
       this.inputFormatters,
-      this.textFieldWhitGradient = false});
+      this.textFieldWithGradient = false,
+      this.colorMaterial});
 
   @override
   _KitTextfieldState createState() => _KitTextfieldState();
@@ -113,7 +115,9 @@ class _KitTextfieldState extends State<KitTextfield> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        widget.textFieldWhitGradient ? textFieldPadrao() : textFieldPadrao()
+        widget.textFieldWithGradient
+            ? texfieldWithGradient()
+            : textFieldDefault()
       ],
     );
   }
@@ -126,6 +130,7 @@ class _KitTextfieldState extends State<KitTextfield> {
       child: Material(
         elevation: 5,
         borderRadius: BorderRadius.circular(56),
+        color: widget.colorMaterial,
         child: TextField(
           controller: widget.controller,
           keyboardType: TextInputType.text,
@@ -142,7 +147,7 @@ class _KitTextfieldState extends State<KitTextfield> {
     );
   }
 
-  Widget textFieldPadrao() {
+  Widget textFieldDefault() {
     return Column(
       children: [
         widget.containTiltle!
@@ -154,9 +159,11 @@ class _KitTextfieldState extends State<KitTextfield> {
                   children: [
                     SizedBox(
                       height: 35,
-                      child: Text(
-                        widget.title,
-                        style: widget.titleStyle,
+                      child: Flexible(
+                        child: Text(
+                          widget.title,
+                          style: widget.titleStyle,
+                        ),
                       ),
                     ),
                   ],
