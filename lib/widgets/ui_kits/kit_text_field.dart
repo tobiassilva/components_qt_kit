@@ -42,6 +42,7 @@ class KitTextfield extends StatefulWidget {
   final bool alignLabelWithHint;
 
   final TextStyle? titleStyle;
+  final TextStyle? style;
 
   // em desenvolvimento > final bool? defaultTextField;
 
@@ -103,7 +104,8 @@ class KitTextfield extends StatefulWidget {
       this.widthBorderSide = 1.0,
       this.inputFormatters,
       this.textFieldWithGradient = false,
-      this.colorMaterial});
+      this.colorMaterial,
+      this.style});
 
   @override
   _KitTextfieldState createState() => _KitTextfieldState();
@@ -132,6 +134,7 @@ class _KitTextfieldState extends State<KitTextfield> {
         borderRadius: BorderRadius.circular(56),
         color: widget.colorMaterial,
         child: TextField(
+          style: widget.style,
           onChanged: widget.onChanged,
           keyboardType: widget.keyboardType ?? TextInputType.text,
           obscureText: widget.obscureText,
