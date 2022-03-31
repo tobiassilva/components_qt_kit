@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:components_qt_kit/components_qt_kit.dart';
+import 'package:components_qt_kit/widgets/ui_kits/kit_image_picker_view.dart';
 import 'package:components_qt_kit/widgets/ui_kits/kit_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:components_qt_kit/widgets/ui_kits/kit_buttons.dart';
@@ -50,6 +51,7 @@ class _MyAppState extends State<MyApp> {
   final controladorTeste = TextEditingController();
   final controladorTeste2 = TextEditingController();
   var icone = Icons.visibility;
+  final List listaTesteImagens = [];
 
   @override
   Widget build(BuildContext context) {
@@ -60,42 +62,16 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.grey[100],
           body: carregando
               ? CircularProgressIndicator()
-              : Column(
+              : ListView(
+                  physics: AlwaysScrollableScrollPhysics(),
                   children: [
                     KitAppBar(),
-                    Expanded(
-                      child: Container(
-                        color: Colors.white,
-                        height: 900,
-                        width: 500,
-                        margin: EdgeInsets.symmetric(vertical: 0),
-                        child: Column(
-                          children: [
-                            KitButton(
-                              onTap: () {},
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            KitTextfield(
-                              padding: EdgeInsets.all(30),
-                              colorMaterial: Colors.white,
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 5),
-                              decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topLeft,
-                                      end: Alignment.centerRight,
-                                      colors: [
-                                        Colors.blue,
-                                        Colors.blueGrey,
-                                      ]),
-                                  borderRadius: BorderRadius.circular(56)),
-                              textFieldWithGradient: true,
-                            ),
-                          ],
-                        ),
-                      ),
+                    KitImagePickerView(
+                      convertImage: true,
+                      listConverted: listaTesteImagens,
+                      maxImages: 5,
+                      marginHorizontal: 20,
+                      marginVertical: 20,
                     ),
                   ],
                 ),
