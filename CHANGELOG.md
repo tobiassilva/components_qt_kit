@@ -1,4 +1,9 @@
  
+## [0.1.2] - Décima Segunda Release.
+
+* Décima Segunda Release
+ 
+
 ## [0.1.1] - Décima Primeiro Release.
 
 * Décima Primeiro Release
