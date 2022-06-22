@@ -29,6 +29,12 @@ environment:
 dependencies:
   components_qt_kit:
     path: ../
+  provider: ^6.0.3
+
+  flutter_mobx: ^2.0.2
+  mobx: ^2.0.4
+  mobx_codegen: ^2.0.3
+  animated_text_kit: 
  
   flutter:
     sdk: flutter
@@ -41,6 +47,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^2.1.1
+  
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -76,10 +84,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Josefin Sans
+      fonts:
+          - asset: asset/JosefinSans-VariableFont_wght.ttf
+          - asset: asset/JosefinSans-Italic-VariableFont_wght.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

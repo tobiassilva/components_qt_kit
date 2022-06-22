@@ -52,7 +52,6 @@ class _KitLoadingState extends State<KitLoading> {
               SizedBox(
                 height: widget.spaceItens!,
               ),
-              Text(widget.text, style: widget.textStyle),
             ],
           ),
         ],

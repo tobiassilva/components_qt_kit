@@ -35,7 +35,7 @@ class KitImagePickerView extends StatefulWidget {
     this.actionBarTitle = '',
     this.containTitle,
     this.marginHorizontal = 0,
-    this.marginVertical = 0,
+    this.marginVertical = 5,
     this.title = "",
     this.maxImages = 1,
     this.allViewTitle = 'Todas as imagens',
@@ -106,6 +106,7 @@ class _KitImagePickerViewState extends State<KitImagePickerView> {
 
         setState(() {
           listImages.addAll(aux2);
+          aux2.isEmpty ? _visibilityButton = true : _visibilityButton = false;
         });
       }
     } catch (e) {
@@ -135,7 +136,6 @@ class _KitImagePickerViewState extends State<KitImagePickerView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * .6,
       width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.symmetric(
           horizontal: widget.marginHorizontal!,
@@ -143,6 +143,7 @@ class _KitImagePickerViewState extends State<KitImagePickerView> {
       child: Column(
         children: [
           widget.convertImage! ? _buttomImageConvert() : _buttomImage(),
+          // a grid aparece somente quando a lista não é vazia
           Visibility(
             visible: _visibilityGridImages,
             child: buildGridViewImages(),
@@ -152,6 +153,7 @@ class _KitImagePickerViewState extends State<KitImagePickerView> {
     );
   }
 
+// widget usado quando o usuario quer exibir as imagens selecionadas, mas sem convertelas
   Widget _buttomImage() {
     return Visibility(
       visible: _visibilityButton,
@@ -195,6 +197,8 @@ class _KitImagePickerViewState extends State<KitImagePickerView> {
     );
   }
 
+  // esse botão é chamado quando o usuario habilita a conversão das imagens para base64
+  // convertImage
   Widget _buttomImageConvert() {
     return Visibility(
       visible: _visibilityButton,
@@ -234,9 +238,9 @@ class _KitImagePickerViewState extends State<KitImagePickerView> {
           children: [
             Text(
                 widget.titleButton == ''
-                    ? ' converte ImagemB64'
+                    ? 'Adicionar Imagem Base 64'
                     : widget.titleButton!,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 15,
                     fontWeight: FontWeight.bold)),
@@ -252,16 +256,19 @@ class _KitImagePickerViewState extends State<KitImagePickerView> {
     );
   }
 
+// cria um grid view para exibir as imagens selecionadas
+// as imagens devem estar armazenadas em uma lista do tipo Asset
+
   Widget buildGridViewImages() {
     return GridView.builder(
         physics: const ScrollPhysics(),
         shrinkWrap: true,
-        padding: const EdgeInsets.only(bottom: 20),
         itemCount: listImages.length,
         gridDelegate: _gridConfig(),
         itemBuilder: (context, index) => mostraImagemSelecionada(index));
   }
 
+  // configuração do griview
   SliverGridDelegate _gridConfig() {
     return SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: listImages.isNotEmpty ? listImages.length : 1,
@@ -272,10 +279,10 @@ class _KitImagePickerViewState extends State<KitImagePickerView> {
     );
   }
 
+  // estrutura da imagem que será mostrada
   Widget mostraImagemSelecionada(
     index,
   ) {
-    final _size = MediaQuery.of(context).size;
     return Stack(
       alignment: Alignment.topLeft,
       children: [
@@ -287,6 +294,7 @@ class _KitImagePickerViewState extends State<KitImagePickerView> {
           width: 400,
           height: 400,
         ),
+        // icone que remove uma imagem da lista de exibição
         Align(
           alignment: Alignment.topLeft,
           child: IconButton(

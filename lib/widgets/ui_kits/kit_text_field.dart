@@ -127,8 +127,8 @@ class _KitTextfieldState extends State<KitTextfield> {
   Widget texfieldWithGradient() {
     return Container(
       decoration: widget.decoration,
-      padding: widget.margin,
-      margin: widget.padding,
+      padding: widget.padding,
+      margin: widget.margin,
       child: Material(
         elevation: 5,
         borderRadius: BorderRadius.circular(56),
