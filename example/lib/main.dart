@@ -109,6 +109,7 @@ class _HomePageState extends State<HomePage> {
                   ))
               : Container(
                   color: Colors.white,
+                  height: MediaQuery.of(context).size.height,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -163,12 +164,7 @@ class _HomePageState extends State<HomePage> {
                           height: MediaQuery.of(context).size.height * .08,
                           width: MediaQuery.of(context).size.width * .5,
                         ),
-                        Divider(
-                          endIndent: 20,
-                          indent: 20,
-                          height: 30,
-                          color: Colors.grey[400],
-                        ),
+
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 20),
                           child: Row(
@@ -377,12 +373,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        Divider(
-                          endIndent: 20,
-                          indent: 20,
-                          height: 30,
-                          color: Colors.grey[400],
-                        ),
+
                         KitButton(
                           width: MediaQuery.of(context).size.width * .8,
                           height: MediaQuery.of(context).size.height * .08,

@@ -1,4 +1,8 @@
  
+## [0.1.3] - Décima Terceira Release.
+
+* Décima Terceira Release
+
 ## [0.1.2] - Décima Segunda Release.
 
 * Décima Segunda Release
